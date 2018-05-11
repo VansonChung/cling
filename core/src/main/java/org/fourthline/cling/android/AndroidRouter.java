@@ -15,6 +15,7 @@
 
 package org.fourthline.cling.android;
 
+import android.util.Log;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -212,15 +213,18 @@ public class AndroidRouter extends RouterImpl {
             oldNetwork == null ? "" : oldNetwork.getTypeName(),
             newNetwork == null ? "NONE" : newNetwork.getTypeName()));
 
+        Log.i("111111111111111111111", "AndroidRouter disable");
         if (disable()) {
+            Log.i("111111111111111111111", "AndroidRouter disable 111111111111111111111");
             log.info(String.format(
                 "Disabled router on network type change (old network: %s)",
                 oldNetwork == null ? "NONE" : oldNetwork.getTypeName()
             ));
         }
-
+        Log.i("111111111111111111111", "AndroidRouter enable");
         networkInfo = newNetwork;
         if (enable()) {
+            Log.i("111111111111111111111", "AndroidRouter enable 1111111111111111111111");
             // Can return false (via earlier InitializationException thrown by NetworkAddressFactory) if
             // no bindable network address found!
             log.info(String.format(

@@ -15,6 +15,8 @@
 
 package org.fourthline.cling.transport;
 
+import android.util.Log;
+
 import org.fourthline.cling.UpnpServiceConfiguration;
 import org.fourthline.cling.model.NetworkAddress;
 import org.fourthline.cling.model.message.IncomingDatagramMessage;
@@ -123,8 +125,10 @@ public class RouterImpl implements Router {
     public boolean enable() throws RouterException {
         lock(writeLock);
         try {
+Log.i("111111111111111111111", "RouterImpl enable : " + enabled);
             if (!enabled) {
                 try {
+Log.i("111111111111111111111", "RouterImpl enable in");
                     log.fine("Starting networking services...");
                     networkAddressFactory = getConfiguration().createNetworkAddressFactory();
 
@@ -144,6 +148,7 @@ public class RouterImpl implements Router {
                     enabled = true;
                     return true;
                 } catch (InitializationException ex) {
+Log.i("111111111111111111111", "RouterImpl enable Ex : " + ex.toString());
                     handleStartFailure(ex);
                 }
             }
@@ -157,7 +162,9 @@ public class RouterImpl implements Router {
     public boolean disable() throws RouterException {
         lock(writeLock);
         try {
+Log.i("111111111111111111111", "RouterImpl disable : " + enabled);
             if (enabled) {
+Log.i("111111111111111111111", "RouterImpl disable in");
                 log.fine("Disabling network services...");
 
                 if (streamClient != null) {
